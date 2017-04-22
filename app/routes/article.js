@@ -5,12 +5,22 @@ import {
   View,
   ScrollView,
   Image,
+  WebView,
 } from 'react-native'
 
 export default class ArticleScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: `Chat with ${navigation.state.params.user}`,
-  });
+  static navigationOptions = {
+    header: () => ({
+      title: <Text style={styles.header}> NEWS </Text> ,
+      style: {
+        backgroundColor: '#50E3C2',
+        shadowColor: '#979797',
+        shadowOpacity: 5,
+        shadowRadius: 2,
+        shadowOffset: {width: 2, height: 2},
+      }
+    })
+  }
 
   constructor(props) {
     super(props);
@@ -42,11 +52,16 @@ export default class ArticleScreen extends Component {
       <View>
         <View>
           <Image
-            style={{width: 100, height: 100}}
+            style={styles.image}
             source={{uri: this.state.article.content.fields.thumbnail}}
           />
-          <Text>{this.state.article.content.fields.headline}</Text>
-          <Text>{this.state.article.content.fields.bodyText}</Text>
+          <Text style={styles.sectionName}>{this.state.article.content.sectionName}</Text>
+          <Text style={styles.headline}>{this.state.article.content.fields.headline}</Text>
+          <Text style={styles.textContainer}>{this.state.article.content.fields.bodyText}</Text>
+          <WebView
+            source={{html: this.state.article.content.fields.body}}
+            style={{marginTop: 20}}
+          />
         </View>
       </View>
     );
@@ -88,20 +103,27 @@ export default class ArticleScreen extends Component {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  textContainer: {
+    margin: 20,
+    fontSize: 15,
+    lineHeight: 25,
   },
-  welcome: {
+  image: {
+    height: 200,
+  },
+  sectionName: {
+    fontSize: 15,
+    textAlign: 'center',
+    margin: 10,
+  },
+  headline: {
+    color: 'red',
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  header: {
+    fontSize: 50,
+    color: 'yellow',
   },
 });
