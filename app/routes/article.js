@@ -6,7 +6,8 @@ import {
   ScrollView,
   Image,
   WebView,
-} from 'react-native'
+} from 'react-native';
+import HTMLView from 'react-native-htmlview';
 
 export default class ArticleScreen extends Component {
   static navigationOptions = {
@@ -57,10 +58,11 @@ export default class ArticleScreen extends Component {
           />
           <Text style={styles.sectionName}>{this.state.article.content.sectionName}</Text>
           <Text style={styles.headline}>{this.state.article.content.fields.headline}</Text>
-          <Text style={styles.textContainer}>{this.state.article.content.fields.bodyText}</Text>
-          <WebView
-            source={{html: this.state.article.content.fields.body}}
-            style={{marginTop: 20}}
+          <HTMLView
+            value={this.state.article.content.fields.body}
+            addLineBreaks={false}
+            stylesheet={htmlStyle}
+            style={styles.webView}
           />
         </View>
       </View>
@@ -97,16 +99,11 @@ export default class ArticleScreen extends Component {
         console.error(error);
       });
   }
-
-
 }
 
-
 const styles = StyleSheet.create({
-  textContainer: {
-    margin: 20,
-    fontSize: 15,
-    lineHeight: 25,
+  webView: {
+    margin: 20
   },
   image: {
     height: 200,
@@ -127,3 +124,12 @@ const styles = StyleSheet.create({
     color: 'yellow',
   },
 });
+
+const htmlStyle = StyleSheet.create({
+  p: {
+    fontSize: 15,
+    lineHeight: 25,
+    margin: 0,
+    padding: 0,
+  }
+})
