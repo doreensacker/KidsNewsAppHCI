@@ -6,6 +6,7 @@ import {
   Button,
   ListView,
   View,
+  Image,
 } from 'react-native'
 
 export default class HomeScreen extends Component {
@@ -21,12 +22,11 @@ export default class HomeScreen extends Component {
     };
   }
   render() {
-    // const { navigate } = this.props.navigation;
     if(this.state.loaded){
       return(
-        <View>
-          {this.WholeNews()}
-        </View>
+        <ScrollView>
+          {this.wholeNews()}
+        </ScrollView>
       );
     }
     return (
@@ -38,27 +38,19 @@ export default class HomeScreen extends Component {
     );
   }
 
-  WholeNews() {
+  wholeNews() {
+    const { navigate } = this.props.navigation;
     return this.state.dataSource.map(function(news, i){
       return(
         <View key={i}>
-          <Text>{news.webTitle}</Text>
+          <Text onPress={() => navigate('Article', { articleURL: news.apiUrl }) }>{news.webTitle}</Text>
           <View>
             <Text>{news.webPublicationDate}</Text>
             <Text>{news.sectionName}</Text>
-          </View>
-        </View>
-      );
-    });
-  }
-
-  WholeMovies() {
-    return this.state.dataSource.map(function(movie, i){
-      return(
-        <View key={i}>
-          <Text>{movie.title}</Text>
-          <View>
-            <Text>{movie.releaseYear}</Text>
+            <Image
+              style={{width: 100, height: 100}}
+              source={{uri: news.fields.thumbnail}}
+            />
           </View>
         </View>
       );
@@ -84,7 +76,7 @@ export default class HomeScreen extends Component {
   }
 
   getArticlesFromApiAsync() {
-    return fetch('https://content.guardianapis.com/search?q=lifestyle&api-key=ffc6bb6f-72e2-4c3d-9b5a-c14f1889f46d')
+    return fetch('https://content.guardianapis.com/search?q=lifestyle&show-fields=thumbnail&api-key=ffc6bb6f-72e2-4c3d-9b5a-c14f1889f46d')
       .then((response) => response.json())
       .then((responseJson) => {
         return responseJson.response.results;
@@ -95,30 +87,7 @@ export default class HomeScreen extends Component {
   }
 
 
-  getMoviesFromApiAsync() {
-    return fetch('https://facebook.github.io/react-native/movies.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson.movies;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
 }
-
-
-
-// <Text style={styles.welcome}>
-//   Welcome to React Native!
-// </Text>
-// <Button
-//   onPress={() => navigate('Article')}
-//   title="Chat with Lucy"
-// />
-
-
 
 
 const styles = StyleSheet.create({
