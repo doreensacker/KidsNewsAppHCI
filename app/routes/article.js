@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   Image,
-  WebView,
 } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
