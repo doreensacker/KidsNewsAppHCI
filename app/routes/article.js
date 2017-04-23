@@ -7,6 +7,7 @@ import {
   Image,
 } from 'react-native';
 import HTMLView from 'react-native-htmlview';
+import {Answers} from 'react-native-fabric';
 
 export default class ArticleScreen extends Component {
   constructor(props) {
@@ -55,7 +56,6 @@ export default class ArticleScreen extends Component {
     );
   }
 
-
   header = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -67,10 +67,13 @@ export default class ArticleScreen extends Component {
 
   _fetchData() {
     this.getArticleFromApiAsync()
-    .then( (response) => this.setState({
-      article: response,
-      loaded: true,
-    })
+    .then( (response) => {
+      this.setState({
+        article: response,
+        loaded: true,
+      });
+      Answers.logCustom('ArticleScreen loaded', { article: this.state.article.content.fields.headline });
+    }
     );
   }
 

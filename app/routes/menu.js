@@ -6,6 +6,7 @@ import {
   ListView,
   View,
 } from 'react-native';
+import {Answers} from 'react-native-fabric';
 
 export default class MenuScreen extends Component {
   static navigationOptions = {
@@ -46,6 +47,11 @@ export default class MenuScreen extends Component {
         </ScrollView>
     );
   }
+
+  componentDidMount() {
+    Answers.logCustom('show menu', { bigData: true });
+  }
+
 
 }
 

@@ -9,6 +9,7 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
+import {Answers} from 'react-native-fabric';
 
 export default class HomeScreen extends Component {
 
@@ -69,6 +70,7 @@ export default class HomeScreen extends Component {
   };
 
   componentDidMount() {
+    Answers.logCustom('Homeview loaded', { bigData: true });
     this._fetchData();
   }
 
