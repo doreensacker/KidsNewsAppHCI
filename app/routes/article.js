@@ -9,18 +9,6 @@ import {
 import HTMLView from 'react-native-htmlview';
 
 export default class ArticleScreen extends Component {
-  
-  static navigationOptions = {
-    headerTitle: <Text> NEWS </Text> ,
-    headerStyle: {
-      backgroundColor: '#50E3C2',
-      shadowColor: '#979797',
-      shadowOpacity: 5,
-      shadowRadius: 2,
-      shadowOffset: {width: 2, height: 2},
-    }
-  }
-
   constructor(props) {
     super(props);
     this.state = {

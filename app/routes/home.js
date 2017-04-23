@@ -11,17 +11,6 @@ import {
 } from 'react-native';
 
 export default class HomeScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: <Text>NEWS</Text>,
-      headerRight: (
-        <Button
-          title='menu'
-          onPress={() => navigation.navigate('DrawerOpen') }
-        >Menu</Button>
-      )
-    };
-  }
 
   constructor(props) {
     super(props);
@@ -128,10 +117,6 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowOffset: {width: 2, height: 2},
   },
-  header: {
-    fontSize: 50,
-    color: 'yellow',
-  },
   headline: {
     color: '#5D5D5D',
     fontWeight: 'bold',
@@ -145,5 +130,10 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 13,
     margin: 2,
+  },
+  menuIcon: {
+    width: 40,
+    height: 40,
+    margin: 5,
   }
 });

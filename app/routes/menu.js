@@ -10,6 +10,13 @@ import {
 export default class MenuScreen extends Component {
   static navigationOptions = {
     headerTitle: <Text> NEWS </Text>,
+    headerStyle: {
+      backgroundColor: '#50E3C2',
+      shadowColor: '#979797',
+      shadowOpacity: 5,
+      shadowRadius: 2,
+      shadowOffset: {width: 2, height: 2},
+    }
   }
 
   constructor(props) {
@@ -19,12 +26,12 @@ export default class MenuScreen extends Component {
       dataSource: ds.cloneWithRows(['World', 'Sport', 'Cultur', 'Lifestyle', 'Fashion', 'Tech', 'Travel', 'Environment']),
     };
   }
-  
+
   render() {
     // const { navigate } = this.props.navigation;
     console.log(this.props);
     return(
-        <ScrollView>
+        <ScrollView style={styles.list}>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
@@ -43,15 +50,20 @@ export default class MenuScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  list: {
+    paddingTop: 30,
+    backgroundColor: '#50E3C2',
+  },
   listItemView :{
     borderBottomWidth: 1,
     borderStyle: 'solid',
-    borderBottomColor: '#cccfd2',
-    margin: 8,
+    borderBottomColor: '#ffffff',
   },
   listItem: {
-    fontSize: 20,
-    color: '#000000',
+    fontSize: 25,
+    color: 'yellow',
+    fontWeight: 'bold',
+    margin: 8,
   },
   headerStyle: {
     backgroundColor: '#50E3C2',
@@ -59,6 +71,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 5,
     shadowRadius: 2,
     shadowOffset: {width: 2, height: 2},
-  }
+  },
+  header: {
+    fontSize: 50,
+    color: 'yellow',
+  },
 
 });
