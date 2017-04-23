@@ -8,16 +8,16 @@ import {
   View,
   Image,
   TouchableHighlight,
-} from 'react-native'
+} from 'react-native';
 
 export default class HomeScreen extends Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: 'TEST',
+      headerTitle: <Text>NEWS</Text>,
       headerRight: (
         <Button
           title='menu'
-          onPress={() => this.props.navigation.navigate('DrawerOpen') }
+          onPress={() => navigation.navigate('DrawerOpen') }
         >Menu</Button>
       )
     };
@@ -93,7 +93,14 @@ export default class HomeScreen extends Component {
   }
 
   getArticlesFromApiAsync() {
-    return fetch('https://content.guardianapis.com/search?q=lifestyle&show-fields=thumbnail,headline&api-key=ffc6bb6f-72e2-4c3d-9b5a-c14f1889f46d')
+    const { params } = this.props.navigation.state;
+    let section = '';
+    if(params){
+      section = 'q=' + params.section + '&';
+    }
+    return fetch('https://content.guardianapis.com/search?'
+                  + section
+                  + 'show-fields=thumbnail,headline&api-key=ffc6bb6f-72e2-4c3d-9b5a-c14f1889f46d')
       .then((response) => response.json())
       .then((responseJson) => {
         return responseJson.response.results;

@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   ScrollView,
-} from 'react-native'
+} from 'react-native';
 import { DrawerNavigator, DrawerView, StackNavigator} from 'react-navigation';
 import HomeScreen from './routes/home';
 import ArticleScreen from './routes/article';
-
-const KidsNewsAppDrawer = DrawerNavigator({
-  Home: { screen: HomeScreen },
-}, {
-  drawerWidth: 200,
-  drawerPosition: 'right',
-  contentComponent: props => <ScrollView><DrawerView.Items {...props} /></ScrollView>
-}
-
-);
+import MenuScreen from './routes/menu';
 
 const KidsNewsApp = StackNavigator({
   Home: { screen: HomeScreen },
   Article: { screen: ArticleScreen },
-  Menu: {screen: KidsNewsAppDrawer},
+  Menu: { screen: MenuScreen }
 });
 
-export default KidsNewsApp;
+const KidNewsAppContainer = DrawerNavigator({
+  App: { screen: KidsNewsApp },
+}, {
+  drawerWidth: 200,
+  drawerPosition: 'right',
+  contentComponent: props => <ScrollView><MenuScreen {...props}/></ScrollView>
+}
+
+);
+
+export default KidNewsAppContainer;
