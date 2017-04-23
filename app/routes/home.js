@@ -11,17 +11,16 @@ import {
 } from 'react-native'
 
 export default class HomeScreen extends Component {
-  static navigationOptions = {
-    header: () => ({
-      title: <Text style={styles.header}> NEWS </Text> ,
-      style: {
-        backgroundColor: '#50E3C2',
-        shadowColor: '#979797',
-        shadowOpacity: 5,
-        shadowRadius: 2,
-        shadowOffset: {width: 2, height: 2},
-      }
-    })
+  static navigationOptions = () => {
+    return {
+      headerTitle: 'TEST',
+      headerRight: (
+        <Button
+          title='menu'
+          onPress={() => this.props.navigation.navigate('DrawerOpen') }
+        >Menu</Button>
+      )
+    };
   }
 
   constructor(props) {
